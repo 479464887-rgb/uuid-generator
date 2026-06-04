@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>UUID Generator - 免费在线工具</title>
+<meta name="description" content="在线UUID/GUID生成器 - 批量生成v4 UUID，支持一键复制和下载">
+<style>*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh;display:flex;flex-direction:column}
+header{background:#161b22;border-bottom:1px solid #30363d;padding:16px 24px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:18px;font-weight:700;color:#58a6ff}
+.logo span{color:#f0c040}
+header .badge{font-size:10px;background:#daa520;color:#fff;padding:2px 8px;border-radius:10px;margin-left:8px}
+main{max-width:700px;margin:0 auto;padding:32px 24px;flex:1}
+.tool-wrapper{padding:20px 0}
+footer{padding:16px 24px;border-top:1px solid #21262d;text-align:center;font-size:12px;color:#484f58}
+footer a{color:#58a6ff;text-decoration:none;margin:0 8px}
+.btn-primary:hover{background:#2ea043!important}
+.btn:hover{background:#30363d!important}
+input:focus,textarea:focus,select:focus{outline:none;border-color:#58a6ff!important}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🛠 <span>Dev</span>Kit<span class="badge">BETA</span></div>
+  <div style="font-size:11px;color:#8b949e">🔒 本地处理 · 数据不上传</div>
+</header>
+<main>
+  <h1 style="font-size:24px;margin-bottom:4px">UUID Generator</h1>
+  <p style="color:#8b949e;font-size:14px;margin-bottom:8px">在线UUID/GUID生成器 - 批量生成v4 UUID，支持一键复制和下载</p>
+<div class="tool-wrapper">
+  <div style="display:flex;gap:8px;margin-bottom:16px;align-items:end">
+    <div style="flex:1"><label style="font-size:12px;color:#8b949e">生成数量</label><input type="number" id="uuid-count" value="10" min="1" max="100" style="width:100%;padding:10px;border:1px solid #30363d;border-radius:6px;background:#0d1117;color:#c9d1d9;font-size:14px;outline:none"></div>
+    <div><label style="font-size:12px;color:#8b949e">格式</label><select id="uuid-format" style="padding:10px;border:1px solid #30363d;border-radius:6px;background:#0d1117;color:#c9d1d9;font-size:13px">
+      <option value="lower">小写</option><option value="upper">大写</option><option value="nohyphen">无连字符</option>
+    </select></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:16px">
+    <button class="btn btn-primary" style="flex:1;padding:12px;background:#238636;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600" onclick="generateUUIDs()">🔄 生成 UUID</button>
+    <button class="btn" style="padding:12px 24px;background:#21262d;color:#c9d1d9;border:1px solid #30363d;border-radius:8px;cursor:pointer;font-size:14px" onclick="copyUUIDs()">📋 复制全部</button>
+  </div>
+  <div id="uuid-result" style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:16px;font-family:'SF Mono','Consolas',monospace;font-size:13px;line-height:2;min-height:200px;max-height:400px;overflow:auto;white-space:pre;color:#c9d1d9"></div>
+</div>
+</main>
+<footer>
+  <a href="https://github.com/479464887-rgb/uuid-generator">GitHub</a>
+  <span>·</span>
+  <a href="mailto:tulv202900@163.com">Contact</a>
+  <span>·</span>
+  <span>© 2026 DevKit</span>
+</footer>
+<script>
+function genUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = crypto.getRandomValues(new Uint8Array(1))[0] % 16;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+function generateUUIDs() {
+  const count = Math.min(100, Math.max(1, parseInt(document.getElementById('uuid-count').value) || 10));
+  const fmt = document.getElementById('uuid-format').value;
+  const uuids = [];
+  for (let i = 0; i < count; i++) {
+    let u = genUUID();
+    if (fmt === 'upper') u = u.toUpperCase();
+    if (fmt === 'nohyphen') u = u.replace(/-/g, '');
+    uuids.push(u);
+  }
+  document.getElementById('uuid-result').textContent = uuids.join('\n');
+}
+function copyUUIDs() {
+  const text = document.getElementById('uuid-result').textContent;
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const el = document.getElementById('uuid-result');
+    el.style.borderColor = '#3fb950';
+    setTimeout(() => el.style.borderColor = '#30363d', 1000);
+  });
+}
+generateUUIDs();
+</script>
+</body>
+</html>
