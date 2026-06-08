@@ -10,7 +10,14 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠</text></svg>">
 
 <meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠</text></svg>">
+<meta name="theme-color" content="#0d1117">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta property="og:title" content="UUID Generator - 免费Online Tools — DevKit Tools">
+<meta property="og:description" content="在线UUID/GUIDGenerate器 - 批量Generatev4 UUID，支持一键Copy和Download">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://479464887-rgb.github.io/uuid-generator/">
+<meta name="twitter:card" content="summary_large_image">
 <title>UUID Generator - 免费Online Tools</title>
 <meta name="description" content="在线UUID/GUIDGenerate器 - 批量Generatev4 UUID，支持一键Copy和Download">
 <style>*{margin:0;padding:0;box-sizing:border-box}
@@ -27,6 +34,9 @@ footer a{color:#58a6ff;text-decoration:none;margin:0 8px}
 .btn:hover{background:#30363d!important}
 input:focus,textarea:focus,select:focus{outline:none;border-color:#58a6ff!important}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"UUID Generator - 免费Online Tools","description":"在线UUID/GUIDGenerate器 - 批量Generatev4 UUID，支持一键Copy和Download","url":"https://479464887-rgb.github.io/uuid-generator/","applicationCategory":"DeveloperApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
 </head>
 <body>
 <header>
@@ -58,6 +68,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:#58a6ff!import
   <span>© 2026 DevKit</span>
 </footer>
 <script>
+'use strict';
 function genUUID() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
     const r = crypto.getRandomValues(new Uint8Array(1))[0] % 16;
